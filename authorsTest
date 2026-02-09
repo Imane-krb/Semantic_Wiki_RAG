@@ -1,0 +1,331 @@
+[
+    {
+        "author_position": "first",
+        "author": {
+            "id": "https://openalex.org/A5039716383",
+            "display_name": "Anders Clausen",
+            "orcid": "https://orcid.org/0000-0003-1333-7705"
+        },
+        "institutions": [
+            {
+                "id": "https://openalex.org/I184886455",
+                "display_name": "Maersk (Denmark)",
+                "ror": "https://ror.org/046gbzb64",
+                "country_code": "DK",
+                "type": "company",
+                "lineage": [
+                    "https://openalex.org/I184886455"
+                ]
+            },
+            {
+                "id": "https://openalex.org/I177969490",
+                "display_name": "University of Southern Denmark",
+                "ror": "https://ror.org/03yrrjy16",
+                "country_code": "DK",
+                "type": "education",
+                "lineage": [
+                    "https://openalex.org/I177969490"
+                ]
+            }
+        ],
+        "countries": [
+            "DK"
+        ],
+        "is_corresponding": true,
+        "raw_author_name": "Anders Clausen",
+        "raw_affiliation_strings": [
+            "Center for Energy Informatics, Maersk Mc-Kinney Moller Institute, University of Southern Denmark, Campusvej 55, 5230, Odense M, Denmark"
+        ],
+        "affiliations": [
+            {
+                "raw_affiliation_string": "Center for Energy Informatics, Maersk Mc-Kinney Moller Institute, University of Southern Denmark, Campusvej 55, 5230, Odense M, Denmark",
+                "institution_ids": [
+                    "https://openalex.org/I184886455",
+                    "https://openalex.org/I177969490"
+                ]
+            }
+        ]
+    },
+    {
+        "author_position": "middle",
+        "author": {
+            "id": "https://openalex.org/A5063869997",
+            "display_name": "Krzysztof Arendt",
+            "orcid": "https://orcid.org/0000-0001-7095-4676"
+        },
+        "institutions": [
+            {
+                "id": "https://openalex.org/I177969490",
+                "display_name": "University of Southern Denmark",
+                "ror": "https://ror.org/03yrrjy16",
+                "country_code": "DK",
+                "type": "education",
+                "lineage": [
+                    "https://openalex.org/I177969490"
+                ]
+            },
+            {
+                "id": "https://openalex.org/I184886455",
+                "display_name": "Maersk (Denmark)",
+                "ror": "https://ror.org/046gbzb64",
+                "country_code": "DK",
+                "type": "company",
+                "lineage": [
+                    "https://openalex.org/I184886455"
+                ]
+            }
+        ],
+        "countries": [
+            "DK"
+        ],
+        "is_corresponding": false,
+        "raw_author_name": "Krzysztof Arendt",
+        "raw_affiliation_strings": [
+            "Center for Energy Informatics, Maersk Mc-Kinney Moller Institute, University of Southern Denmark, Campusvej 55, 5230, Odense M, Denmark"
+        ],
+        "affiliations": [
+            {
+                "raw_affiliation_string": "Center for Energy Informatics, Maersk Mc-Kinney Moller Institute, University of Southern Denmark, Campusvej 55, 5230, Odense M, Denmark",
+                "institution_ids": [
+                    "https://openalex.org/I184886455",
+                    "https://openalex.org/I177969490"
+                ]
+            }
+        ]
+    },
+    {
+        "author_position": "middle",
+        "author": {
+            "id": "https://openalex.org/A5084805877",
+            "display_name": "Aslak Johansen",
+            "orcid": "https://orcid.org/0000-0001-6133-9030"
+        },
+        "institutions": [
+            {
+                "id": "https://openalex.org/I177969490",
+                "display_name": "University of Southern Denmark",
+                "ror": "https://ror.org/03yrrjy16",
+                "country_code": "DK",
+                "type": "education",
+                "lineage": [
+                    "https://openalex.org/I177969490"
+                ]
+            },
+            {
+                "id": "https://openalex.org/I184886455",
+                "display_name": "Maersk (Denmark)",
+                "ror": "https://ror.org/046gbzb64",
+                "country_code": "DK",
+                "type": "company",
+                "lineage": [
+                    "https://openalex.org/I184886455"
+                ]
+            }
+        ],
+        "countries": [
+            "DK"
+        ],
+        "is_corresponding": false,
+        "raw_author_name": "Aslak Johansen",
+        "raw_affiliation_strings": [
+            "Software engineering unit, Maersk Mc-Kinney Moller Institute, University of Southern Denmark, Campusvej 55, 5230, Odense M, Denmark"
+        ],
+        "affiliations": [
+            {
+                "raw_affiliation_string": "Software engineering unit, Maersk Mc-Kinney Moller Institute, University of Southern Denmark, Campusvej 55, 5230, Odense M, Denmark",
+                "institution_ids": [
+                    "https://openalex.org/I184886455",
+                    "https://openalex.org/I177969490"
+                ]
+            }
+        ]
+    },
+    {
+        "author_position": "middle",
+        "author": {
+            "id": "https://openalex.org/A5006279527",
+            "display_name": "Fisayo Caleb Sangogboye",
+            "orcid": "https://orcid.org/0000-0001-9995-758X"
+        },
+        "institutions": [
+            {
+                "id": "https://openalex.org/I177969490",
+                "display_name": "University of Southern Denmark",
+                "ror": "https://ror.org/03yrrjy16",
+                "country_code": "DK",
+                "type": "education",
+                "lineage": [
+                    "https://openalex.org/I177969490"
+                ]
+            },
+            {
+                "id": "https://openalex.org/I184886455",
+                "display_name": "Maersk (Denmark)",
+                "ror": "https://ror.org/046gbzb64",
+                "country_code": "DK",
+                "type": "company",
+                "lineage": [
+                    "https://openalex.org/I184886455"
+                ]
+            }
+        ],
+        "countries": [
+            "DK"
+        ],
+        "is_corresponding": false,
+        "raw_author_name": "Fisayo Caleb Sangogboye",
+        "raw_affiliation_strings": [
+            "Center for Energy Informatics, Maersk Mc-Kinney Moller Institute, University of Southern Denmark, Campusvej 55, 5230, Odense M, Denmark"
+        ],
+        "affiliations": [
+            {
+                "raw_affiliation_string": "Center for Energy Informatics, Maersk Mc-Kinney Moller Institute, University of Southern Denmark, Campusvej 55, 5230, Odense M, Denmark",
+                "institution_ids": [
+                    "https://openalex.org/I184886455",
+                    "https://openalex.org/I177969490"
+                ]
+            }
+        ]
+    },
+    {
+        "author_position": "middle",
+        "author": {
+            "id": "https://openalex.org/A5034655219",
+            "display_name": "Mikkel Baun Kj\u00e6rgaard",
+            "orcid": "https://orcid.org/0000-0001-5124-744X"
+        },
+        "institutions": [
+            {
+                "id": "https://openalex.org/I177969490",
+                "display_name": "University of Southern Denmark",
+                "ror": "https://ror.org/03yrrjy16",
+                "country_code": "DK",
+                "type": "education",
+                "lineage": [
+                    "https://openalex.org/I177969490"
+                ]
+            },
+            {
+                "id": "https://openalex.org/I184886455",
+                "display_name": "Maersk (Denmark)",
+                "ror": "https://ror.org/046gbzb64",
+                "country_code": "DK",
+                "type": "company",
+                "lineage": [
+                    "https://openalex.org/I184886455"
+                ]
+            }
+        ],
+        "countries": [
+            "DK"
+        ],
+        "is_corresponding": false,
+        "raw_author_name": "Mikkel Baun Kj\u00e6rgaard",
+        "raw_affiliation_strings": [
+            "Software engineering unit, Maersk Mc-Kinney Moller Institute, University of Southern Denmark, Campusvej 55, 5230, Odense M, Denmark"
+        ],
+        "affiliations": [
+            {
+                "raw_affiliation_string": "Software engineering unit, Maersk Mc-Kinney Moller Institute, University of Southern Denmark, Campusvej 55, 5230, Odense M, Denmark",
+                "institution_ids": [
+                    "https://openalex.org/I184886455",
+                    "https://openalex.org/I177969490"
+                ]
+            }
+        ]
+    },
+    {
+        "author_position": "middle",
+        "author": {
+            "id": "https://openalex.org/A5087057053",
+            "display_name": "Christian Veje",
+            "orcid": "https://orcid.org/0000-0002-6955-6424"
+        },
+        "institutions": [
+            {
+                "id": "https://openalex.org/I184886455",
+                "display_name": "Maersk (Denmark)",
+                "ror": "https://ror.org/046gbzb64",
+                "country_code": "DK",
+                "type": "company",
+                "lineage": [
+                    "https://openalex.org/I184886455"
+                ]
+            },
+            {
+                "id": "https://openalex.org/I177969490",
+                "display_name": "University of Southern Denmark",
+                "ror": "https://ror.org/03yrrjy16",
+                "country_code": "DK",
+                "type": "education",
+                "lineage": [
+                    "https://openalex.org/I177969490"
+                ]
+            }
+        ],
+        "countries": [
+            "DK"
+        ],
+        "is_corresponding": false,
+        "raw_author_name": "Christian T. Veje",
+        "raw_affiliation_strings": [
+            "Center for Energy Informatics, Maersk Mc-Kinney Moller Institute, University of Southern Denmark, Campusvej 55, 5230, Odense M, Denmark"
+        ],
+        "affiliations": [
+            {
+                "raw_affiliation_string": "Center for Energy Informatics, Maersk Mc-Kinney Moller Institute, University of Southern Denmark, Campusvej 55, 5230, Odense M, Denmark",
+                "institution_ids": [
+                    "https://openalex.org/I184886455",
+                    "https://openalex.org/I177969490"
+                ]
+            }
+        ]
+    },
+    {
+        "author_position": "last",
+        "author": {
+            "id": "https://openalex.org/A5020850598",
+            "display_name": "Bo N\u00f8rregaard J\u00f4rgensen",
+            "orcid": "https://orcid.org/0000-0001-5678-6602"
+        },
+        "institutions": [
+            {
+                "id": "https://openalex.org/I184886455",
+                "display_name": "Maersk (Denmark)",
+                "ror": "https://ror.org/046gbzb64",
+                "country_code": "DK",
+                "type": "company",
+                "lineage": [
+                    "https://openalex.org/I184886455"
+                ]
+            },
+            {
+                "id": "https://openalex.org/I177969490",
+                "display_name": "University of Southern Denmark",
+                "ror": "https://ror.org/03yrrjy16",
+                "country_code": "DK",
+                "type": "education",
+                "lineage": [
+                    "https://openalex.org/I177969490"
+                ]
+            }
+        ],
+        "countries": [
+            "DK"
+        ],
+        "is_corresponding": false,
+        "raw_author_name": "Bo N\u00f8rregaard J\u00f8rgensen",
+        "raw_affiliation_strings": [
+            "Center for Energy Informatics, Maersk Mc-Kinney Moller Institute, University of Southern Denmark, Campusvej 55, 5230, Odense M, Denmark"
+        ],
+        "affiliations": [
+            {
+                "raw_affiliation_string": "Center for Energy Informatics, Maersk Mc-Kinney Moller Institute, University of Southern Denmark, Campusvej 55, 5230, Odense M, Denmark",
+                "institution_ids": [
+                    "https://openalex.org/I184886455",
+                    "https://openalex.org/I177969490"
+                ]
+            }
+        ]
+    }
+]

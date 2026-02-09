@@ -1,0 +1,337 @@
+{
+    "id": "https://openalex.org/S4210191458",
+    "issn_l": "2159-5399",
+    "issn": [
+        "2159-5399",
+        "2374-3468"
+    ],
+    "display_name": "Proceedings of the AAAI Conference on Artificial Intelligence",
+    "host_organization": "https://openalex.org/P4310320058",
+    "host_organization_name": "Association for the Advancement of Artificial Intelligence (AAAI)",
+    "host_organization_lineage": [
+        "https://openalex.org/P4310320058"
+    ],
+    "works_count": 20195,
+    "oa_works_count": 20195,
+    "cited_by_count": 572202,
+    "summary_stats": {
+        "2yr_mean_citedness": 6.1704287591066524,
+        "h_index": 279,
+        "i10_index": 8288
+    },
+    "is_oa": true,
+    "is_in_doaj": false,
+    "is_in_doaj_since_year": null,
+    "is_high_oa_rate": true,
+    "is_high_oa_rate_since_year": null,
+    "is_in_scielo": false,
+    "is_ojs": true,
+    "is_core": false,
+    "oa_flip_year": null,
+    "first_publication_year": 2010,
+    "last_publication_year": 2025,
+    "ids": {
+        "openalex": "https://openalex.org/S4210191458",
+        "issn_l": "2159-5399",
+        "issn": [
+            "2159-5399",
+            "2374-3468"
+        ],
+        "mag": "4210191458",
+        "wikidata": "https://www.wikidata.org/entity/Q27722923"
+    },
+    "homepage_url": "https://www.aaai.org/Library/AAAI/aaai-library.php",
+    "apc_prices": [],
+    "apc_usd": null,
+    "country_code": "US",
+    "societies": [],
+    "alternate_titles": [
+        "Innovative Applications of Artificial Intelligence Conference",
+        "AAAI Conference on Artificial Intelligence",
+        "Proceedings",
+        "AAAI conference on artificial intelligence",
+        "Proceedings of the ... AAAI Conference on Artificial Intelligence and the ... Innovative Applications of Artificial Intelligence Conference",
+        "AAAI / IAAI proceedings"
+    ],
+    "type": "conference",
+    "topics": [
+        {
+            "id": "https://openalex.org/T10028",
+            "display_name": "Topic Modeling",
+            "count": 2558,
+            "score": 1.0,
+            "subfield": {
+                "id": "https://openalex.org/subfields/1702",
+                "display_name": "Artificial Intelligence"
+            },
+            "field": {
+                "id": "https://openalex.org/fields/17",
+                "display_name": "Computer Science"
+            },
+            "domain": {
+                "id": "https://openalex.org/domains/3",
+                "display_name": "Physical Sciences"
+            }
+        },
+        {
+            "id": "https://openalex.org/T10181",
+            "display_name": "Natural Language Processing Techniques",
+            "count": 1875,
+            "score": 1.0,
+            "subfield": {
+                "id": "https://openalex.org/subfields/1702",
+                "display_name": "Artificial Intelligence"
+            },
+            "field": {
+                "id": "https://openalex.org/fields/17",
+                "display_name": "Computer Science"
+            },
+            "domain": {
+                "id": "https://openalex.org/domains/3",
+                "display_name": "Physical Sciences"
+            }
+        },
+        {
+            "id": "https://openalex.org/T11307",
+            "display_name": "Domain Adaptation and Few-Shot Learning",
+            "count": 1380,
+            "score": 1.0,
+            "subfield": {
+                "id": "https://openalex.org/subfields/1702",
+                "display_name": "Artificial Intelligence"
+            },
+            "field": {
+                "id": "https://openalex.org/fields/17",
+                "display_name": "Computer Science"
+            },
+            "domain": {
+                "id": "https://openalex.org/domains/3",
+                "display_name": "Physical Sciences"
+            }
+        },
+        {
+            "id": "https://openalex.org/T11714",
+            "display_name": "Multimodal Machine Learning Applications",
+            "count": 1280,
+            "score": 1.0,
+            "subfield": {
+                "id": "https://openalex.org/subfields/1707",
+                "display_name": "Computer Vision and Pattern Recognition"
+            },
+            "field": {
+                "id": "https://openalex.org/fields/17",
+                "display_name": "Computer Science"
+            },
+            "domain": {
+                "id": "https://openalex.org/domains/3",
+                "display_name": "Physical Sciences"
+            }
+        },
+        {
+            "id": "https://openalex.org/T10627",
+            "display_name": "Advanced Image and Video Retrieval Techniques",
+            "count": 1022,
+            "score": 1.0,
+            "subfield": {
+                "id": "https://openalex.org/subfields/1707",
+                "display_name": "Computer Vision and Pattern Recognition"
+            },
+            "field": {
+                "id": "https://openalex.org/fields/17",
+                "display_name": "Computer Science"
+            },
+            "domain": {
+                "id": "https://openalex.org/domains/3",
+                "display_name": "Physical Sciences"
+            }
+        }
+    ],
+    "topic_share": [
+        {
+            "id": "https://openalex.org/T11307",
+            "display_name": "Domain Adaptation and Few-Shot Learning",
+            "value": 0.0153224,
+            "subfield": {
+                "id": "https://openalex.org/subfields/1702",
+                "display_name": "Artificial Intelligence"
+            },
+            "field": {
+                "id": "https://openalex.org/fields/17",
+                "display_name": "Computer Science"
+            },
+            "domain": {
+                "id": "https://openalex.org/domains/3",
+                "display_name": "Physical Sciences"
+            }
+        },
+        {
+            "id": "https://openalex.org/T12101",
+            "display_name": "Advanced Bandit Algorithms Research",
+            "value": 0.014069,
+            "subfield": {
+                "id": "https://openalex.org/subfields/1803",
+                "display_name": "Management Science and Operations Research"
+            },
+            "field": {
+                "id": "https://openalex.org/fields/18",
+                "display_name": "Decision Sciences"
+            },
+            "domain": {
+                "id": "https://openalex.org/domains/2",
+                "display_name": "Social Sciences"
+            }
+        },
+        {
+            "id": "https://openalex.org/T11714",
+            "display_name": "Multimodal Machine Learning Applications",
+            "value": 0.0140054,
+            "subfield": {
+                "id": "https://openalex.org/subfields/1707",
+                "display_name": "Computer Vision and Pattern Recognition"
+            },
+            "field": {
+                "id": "https://openalex.org/fields/17",
+                "display_name": "Computer Science"
+            },
+            "domain": {
+                "id": "https://openalex.org/domains/3",
+                "display_name": "Physical Sciences"
+            }
+        },
+        {
+            "id": "https://openalex.org/T10462",
+            "display_name": "Reinforcement Learning in Robotics",
+            "value": 0.0123239,
+            "subfield": {
+                "id": "https://openalex.org/subfields/1702",
+                "display_name": "Artificial Intelligence"
+            },
+            "field": {
+                "id": "https://openalex.org/fields/17",
+                "display_name": "Computer Science"
+            },
+            "domain": {
+                "id": "https://openalex.org/domains/3",
+                "display_name": "Physical Sciences"
+            }
+        },
+        {
+            "id": "https://openalex.org/T11689",
+            "display_name": "Adversarial Robustness in Machine Learning",
+            "value": 0.0114441,
+            "subfield": {
+                "id": "https://openalex.org/subfields/1702",
+                "display_name": "Artificial Intelligence"
+            },
+            "field": {
+                "id": "https://openalex.org/fields/17",
+                "display_name": "Computer Science"
+            },
+            "domain": {
+                "id": "https://openalex.org/domains/3",
+                "display_name": "Physical Sciences"
+            }
+        }
+    ],
+    "counts_by_year": [
+        {
+            "year": 2025,
+            "works_count": 3485,
+            "oa_works_count": 3485,
+            "cited_by_count": 3219
+        },
+        {
+            "year": 2024,
+            "works_count": 2867,
+            "oa_works_count": 2867,
+            "cited_by_count": 21317
+        },
+        {
+            "year": 2023,
+            "works_count": 2021,
+            "oa_works_count": 2021,
+            "cited_by_count": 27129
+        },
+        {
+            "year": 2022,
+            "works_count": 1619,
+            "oa_works_count": 1619,
+            "cited_by_count": 36663
+        },
+        {
+            "year": 2021,
+            "works_count": 2328,
+            "oa_works_count": 2328,
+            "cited_by_count": 74313
+        },
+        {
+            "year": 2020,
+            "works_count": 1863,
+            "oa_works_count": 1863,
+            "cited_by_count": 90834
+        },
+        {
+            "year": 2019,
+            "works_count": 1341,
+            "oa_works_count": 1341,
+            "cited_by_count": 74064
+        },
+        {
+            "year": 2018,
+            "works_count": 1102,
+            "oa_works_count": 1102,
+            "cited_by_count": 79801
+        },
+        {
+            "year": 2017,
+            "works_count": 783,
+            "oa_works_count": 783,
+            "cited_by_count": 44203
+        },
+        {
+            "year": 2016,
+            "works_count": 689,
+            "oa_works_count": 689,
+            "cited_by_count": 37554
+        },
+        {
+            "year": 2015,
+            "works_count": 674,
+            "oa_works_count": 674,
+            "cited_by_count": 30896
+        },
+        {
+            "year": 2014,
+            "works_count": 473,
+            "oa_works_count": 473,
+            "cited_by_count": 19500
+        },
+        {
+            "year": 2013,
+            "works_count": 274,
+            "oa_works_count": 274,
+            "cited_by_count": 7417
+        },
+        {
+            "year": 2012,
+            "works_count": 21,
+            "oa_works_count": 21,
+            "cited_by_count": 355
+        },
+        {
+            "year": 2011,
+            "works_count": 323,
+            "oa_works_count": 323,
+            "cited_by_count": 10264
+        },
+        {
+            "year": 2010,
+            "works_count": 332,
+            "oa_works_count": 332,
+            "cited_by_count": 14673
+        }
+    ],
+    "works_api_url": "https://api.openalex.org/works?filter=primary_location.source.id:S4210191458",
+    "updated_date": "2025-11-02T23:13:26.583910",
+    "created_date": "2016-06-24T00:00:00"
+}
