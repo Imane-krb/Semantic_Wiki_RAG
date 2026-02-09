@@ -696,12 +696,12 @@
         ]
     },
     "Keyword": [
-        "https://openalex.org/keywords/computer-science",
-        "https://openalex.org/keywords/energy-consumption",
-        "https://openalex.org/keywords/consumption",
-        "https://openalex.org/keywords/data-science",
-        "https://openalex.org/keywords/engineering",
-        "https://openalex.org/keywords/electrical-engineering"
+        "Computer science",
+        "Energy consumption",
+        "Consumption (sociology)",
+        "Data science",
+        "Engineering",
+        "Electrical engineering"
     ],
     "authors_id": [
         "https://openalex.org/A5114645841",

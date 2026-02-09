@@ -1,9 +1,10 @@
 import requests
 import json
+import os
+from dotenv import load_dotenv
 
-
-
-
+load_dotenv()
+Authorisation= os.getenv("Authorisation")
 
 
 #Organise the extracted data into a dictionary:
@@ -22,7 +23,7 @@ def ArticleMapper(r_json):
 
     Article['Keyword']=[]
     for k in r_json['keywords']:
-        Article['Keyword'].append(k['id'])
+        Article['Keyword'].append(k['display_name'])
 
 
     Article['authors_id']=[]
@@ -39,46 +40,6 @@ def ArticleMapper(r_json):
     return Article
 
 
-
-    
-
-
-
-
-# article de conference: https://doi.org/10.1609/aaai.v35i1.16089
-DOI_list=["https://doi.org/10.1109/ACCESS.2024.3498107"]
-
-'''
-         "https://doi.org/10.1016/j.jobe.2024.111150",
-         "https://doi.org/10.48550/ARXIV.2408.00540",
-          "https://doi.org/10.1109/ACCESS.2024.3498107" 
-'''
-
-urlBase="https://api.openalex.org/works/"
-headers= {"Authorization": f"apikey token=8vD5VvhPAxO0BMfmjGEIm8"}
-
-with requests.Session() as s:
-    s.headers= headers
-
-    for d in DOI_list:
-        r=s.get(url=urlBase+d)
-
-        if r.status_code==200:
-            with open('OpenAlexResponseALL', 'a') as f:
-                r_json=r.json()
-                json.dump(r.json(),f,  indent=4)
-                f.write("================Next DOI ==========================")
-        else:
-            print('There is a problem with doi', d)
-
-
-Article= ArticleMapper(r_json)
-
-
-with open('Article', 'w') as f:
-    json.dump(Article,f, indent=4)
-
-#Now we pass to Category Author,
 
 def Author_Mapper(r_auth_json):      
 
@@ -98,51 +59,6 @@ def Author_Mapper(r_auth_json):
 
     return Author
 
-with requests.Session() as s:
-    s.headers= headers
-    urlBaseAuthor="https://api.openalex.org/authors/"
-
-    A=[]
-    for auth in Article['authors_id']:
-        url= auth
-
-        u=url.split("/")[-1:][0]
-        #print(u)
-
-        new_url= urlBaseAuthor + u
-
-        r=s.get(url=new_url)
-        #print(r.json())
-
-        r_auth_json = r.json()
-        Author=Author_Mapper(r_auth_json)
-        A.append(Author)
-
-
-#Tere is a problem here, 
-
-with open('Author_data2', 'w') as f:
-    f.write(str(A))
-
-
-#Now we mapp journal data
-with requests.Session() as s:
-    s.headers= headers
-    urlBaseAuthor="https://api.openalex.org/"
-
-
-    source=  Article['PublishedIn']['id']
-    u= source.split("/")[-1:][0]
-
-    new_url= urlBaseAuthor + u
-
-    r=s.get(url=new_url)
-        #print(r.json())
-
-    r_source_json = r.json()
-    #print(r_source_json)
-
-
 def Source_Mapper(r_source_json):
     Source={}
     Source['Name']=r_source_json['display_name']
@@ -157,33 +73,118 @@ def Source_Mapper(r_source_json):
     Source['Field']=L
 
     return Source
+
+
+
+
+
+
+def AbstractMapper(DOI):
+    headers= {"Authorization": f"{Authorisation}"}
+    urlBase="https://api.openalex.org/works/"
+    urlBaseAuthor="https://api.openalex.org/authors/"
+    urlBaseAuthor="https://api.openalex.org/"
+
+    with requests.Session() as s:
+        s.headers= headers
+     
+        r=s.get(url=urlBase+DOI)
+
+#Getting the original response:
+        if r.status_code==200:
+            with open('OpenAlexResponseALLNew', 'a') as f:
+                Doi_OriginalResponse=r.json()
+                json.dump(Doi_OriginalResponse,f,  indent=4)
+        else:
+            print('There is a problem with doi', DOI)
+
+#Mapping the original response to Article Category:
+        Article= ArticleMapper(Doi_OriginalResponse)
+
+        with open('Article', 'w') as f:
+            json.dump(Article,f, indent=4)
+
+
+#Mapping the AuthorResponse to Author Category:
+        AuthoreList=[] #List of dictionaries of every author
+        for auth in Article['authors_id']:
+            url= auth
+
+            u=url.split("/")[-1:][0]
+            #print(u)
+
+            new_url= urlBaseAuthor + u
+
+            r=s.get(url=new_url)
+            #print(r.json())
+
+            Author_OriginalResponse = r.json()
+            Author=Author_Mapper(Author_OriginalResponse)
+            AuthoreList.append(Author)
+
+        with open('ListOfAuthors', 'w') as f:
+            f.write(str(AuthoreList))
+        
+
+#Mapping the SourceAnwser to Category JournlaConference
+
+            source=  Article['PublishedIn']['id']
+            u= source.split("/")[-1:][0]
+
+            new_url= urlBaseAuthor + u
+
+            r=s.get(url=new_url)
+                #print(r.json())
+
+            Source_OriginalResponse = r.json()
+            #print(r_source_json)
+    
+            
+            Source= Source_Mapper(Source_OriginalResponse)
+
+            with open('SourceJournalConference', 'w') as f:
+                json.dump(Source,f, indent=4)
+        
+        return Article, AuthoreList, Source
     
 
 
-Source= Source_Mapper(r_source_json)
 
-with open('SourceJournalConference', 'w') as f:
-    json.dump(Source,f, indent=4)
+        
 
 
 
 
+# article de conference: https://doi.org/10.1609/aaai.v35i1.16089
+DOI_list=["https://doi.org/10.1109/ACCESS.2024.3498107"]
 
 
 
+def MappedArticle(DOI):
+    result= AbstractMapper(DOI)
+    return result[0]
+
+def MappedAuthorList(DOI):
+    result= AbstractMapper(DOI)
+    return result[1]
+
+def MappedSource(DOI):
+    result= AbstractMapper(DOI)
+    return result[2]
+
+#print(AbstractMapper(DOI_list[0]))
+
+
+#print(MappedArticle("https://doi.org/10.1109/ACCESS.2024.3498107"))
+
+#print(MappedAuthorList("https://doi.org/10.1093/jamiaopen/ooaf067"))
+'''
+         "https://doi.org/10.1016/j.jobe.2024.111150",
+         "https://doi.org/10.48550/ARXIV.2408.00540",
+          "https://doi.org/10.1109/ACCESS.2024.3498107" 
+'''
 
 
 
-
-
- 
-
-
-
-
-
-#print(Article)
-
-            
 
 

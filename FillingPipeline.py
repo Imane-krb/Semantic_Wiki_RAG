@@ -1,17 +1,36 @@
 import requests 
 import json
+import os
+from dotenv import load_dotenv
+from Extraction import AbstractMapper, MappedAuthorList, MappedArticle, MappedSource
 
-username='Admin@BotTestApi'
-password= 'tpc928c848d00rgru3vqr0lh1u3rmb2r'
 
-username2='Admin'
-password2='BotTestApi@tpc928c848d00rgru3vqr0lh1u3rmb2r'
 
-urlBase= "http://10.3.17.196:8080/api.php"
+
+
+load_dotenv()
+
+username= os.getenv("username")
+password=os.getenv("password")
+
+username2=os.getenv("username2")
+password2=os.getenv("password2")
+
+urlBase=os.getenv('urlBase')
 
 headers={
     'User-Agent': 'CoolBot/0.0 (https://example.org/coolbot/; coolbot@example.org) generic-library/0.0'
 }
+
+
+
+DOI_list=["https://doi.org/10.1109/ACCESS.2024.3498107"]
+
+#DOI de test:
+DOI="https://doi.org/10.1109/ACCESS.2024.3498107"
+
+KeywordList= MappedArticle(DOI)['Keyword']
+#print(KeywordList)
 
 
 with requests.Session() as s:
@@ -47,19 +66,26 @@ with requests.Session() as s:
              }
     r3= s.get(url=urlBase, params=params3)
     crsftoken=r3.json()['query']['tokens']['csrftoken']
-    #print(crsftoken)
+    print(crsftoken)
+
+
+
 
 #Now we create a page:
 #Creating Keyword page using keyword template:
-    data5={'action': 'edit',
-            'title': 'Keyword test via api',
-             'text': '{{keyword|name=keywordTest via api (SecondTest_ Overwritten)}}',
-             'token': crsftoken,
-             'format': 'json'
-             }
-    
-    r3= s.post(url=urlBase, data=data5)
-    print(r3.json())
+    Traceability=[]
+    for k in KeywordList:
+        data5={'action': 'edit',
+                'title': k,
+                'text': f'{{{{keyword|name={k}}}}}',
+                'token': crsftoken,
+                'format': 'json'
+                }
+            
+        r3= s.post(url=urlBase, data=data5)
+        print(r3.json())
+        #Traceability.append(r3.json()['edit']['title'])
+    #print(Traceability)
 
 #Delete a page:
     data6={'action': 'delete',
@@ -68,22 +94,8 @@ with requests.Session() as s:
              'format': 'json'
              }
     
-    r4= s.post(url=urlBase, data=data6)
-    print(r4.json())
+    #r4= s.post(url=urlBase, data=data6)
+    #print(r4.json())
 
-
-'''
-#Now we create a page:
-#Creating Keyword page using keyword template:
-    data5={'action': 'edit',
-            'title': 'Keyword test via api',
-             'text': '{{keyword|name=keywordTest via api (SecondTest_ Overwritten)}}',
-             'token': crsftoken,
-             'format': 'json'
-             }
-    
-    r3= s.post(url=urlBase, data=data5)
-    print(r3.json())
-'''
 
     
