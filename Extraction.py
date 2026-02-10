@@ -25,17 +25,19 @@ def ArticleMapper(r_json):
     for k in r_json['keywords']:
         Article['Keyword'].append(k['display_name'])
 
-
+    Article['authors_names']=[]
     Article['authors_id']=[]
     for l in r_json['authorships']:
         Article['authors_id'].append(l['author']['id'])
+        Article['authors_names'].append(l['author']['display_name'])
 
     '''
         author_dict['name']=l['author']['display_name']
         author_dict['orcid']=l['author']['orcid']
     '''
     Article['PublishedIn']={'type':r_json['primary_location']['source']['type'],
-                            'id':r_json['primary_location']['source']['id']}
+                            'id':r_json['primary_location']['source']['id'],
+                            'name':r_json['primary_location']['source']['display_name']}
     
     return Article
 
@@ -49,13 +51,14 @@ def Author_Mapper(r_auth_json):
     Author['works_count']= r_auth_json['works_count']
     Author['institutions']=[]
     
-    for i in r_auth_json['affiliations']:
-        institutions_dict={}
-        institutions_dict['Name']=i['institution']['display_name']
-        institutions_dict['Country']=i['institution']['country_code']
-        institutions_dict['type']=i['institution']['type']
-    
-    Author['institutions'].append(institutions_dict)
+    if r_auth_json['affiliations']:
+        for i in r_auth_json['affiliations']:
+            institutions_dict={}
+            institutions_dict['Name']=i['institution']['display_name']
+            institutions_dict['Country']=i['institution']['country_code']
+            institutions_dict['type']=i['institution']['type']
+        
+            Author['institutions'].append(institutions_dict)
 
     return Author
 
@@ -92,7 +95,7 @@ def AbstractMapper(DOI):
 
 #Getting the original response:
         if r.status_code==200:
-            with open('OpenAlexResponseALLNew', 'a') as f:
+            with open('DOI_OriginalResponse', 'a') as f:
                 Doi_OriginalResponse=r.json()
                 json.dump(Doi_OriginalResponse,f,  indent=4)
         else:
@@ -108,19 +111,27 @@ def AbstractMapper(DOI):
 #Mapping the AuthorResponse to Author Category:
         AuthoreList=[] #List of dictionaries of every author
         for auth in Article['authors_id']:
-            url= auth
+            if auth:
+                url= auth
 
-            u=url.split("/")[-1:][0]
-            #print(u)
+                u=url.split("/")[-1:][0]
+                #print(u)
 
-            new_url= urlBaseAuthor + u
+                new_url= urlBaseAuthor + u
 
-            r=s.get(url=new_url)
-            #print(r.json())
+                r=s.get(url=new_url)
+                #print(r.json())
 
-            Author_OriginalResponse = r.json()
-            Author=Author_Mapper(Author_OriginalResponse)
-            AuthoreList.append(Author)
+                Author_OriginalResponse = r.json()
+
+                #Troubleshoting:
+                #print(r.json())
+                #with open('Author_OriginalResponse', 'w') as f:
+                    #json.dump(Author_OriginalResponse, f, indent=4)
+
+
+                Author=Author_Mapper(Author_OriginalResponse)
+                AuthoreList.append(Author)
 
         with open('ListOfAuthors', 'w') as f:
             f.write(str(AuthoreList))
@@ -130,6 +141,7 @@ def AbstractMapper(DOI):
 
             source=  Article['PublishedIn']['id']
             u= source.split("/")[-1:][0]
+            #print(u)
 
             new_url= urlBaseAuthor + u
 
@@ -138,6 +150,9 @@ def AbstractMapper(DOI):
 
             Source_OriginalResponse = r.json()
             #print(r_source_json)
+
+            with open('Source_OriginalResponse', 'w') as f:
+                json.dump(Source_OriginalResponse, f, indent=4)
     
             
             Source= Source_Mapper(Source_OriginalResponse)
@@ -156,7 +171,8 @@ def AbstractMapper(DOI):
 
 
 # article de conference: https://doi.org/10.1609/aaai.v35i1.16089
-DOI_list=["https://doi.org/10.1109/ACCESS.2024.3498107"]
+DOI_list=["https://doi.org/10.48550/arXiv.2312.10997", "https://doi.org/10.1609/aaai.v35i1.16089"]
+
 
 
 
@@ -172,7 +188,7 @@ def MappedSource(DOI):
     result= AbstractMapper(DOI)
     return result[2]
 
-#print(AbstractMapper(DOI_list[0]))
+#print(AbstractMapper(DOI_list[1]))
 
 
 #print(MappedArticle("https://doi.org/10.1109/ACCESS.2024.3498107"))
