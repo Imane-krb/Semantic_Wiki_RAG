@@ -33,218 +33,258 @@ DOI="https://doi.org/10.1109/ACCESS.2024.3498107"
 #DOI= "https://doi.org/10.1609/aaai.v35i1.16089"
 
 
-KeywordList= MappedArticle(DOI)['Keyword']
-print(KeywordList)
-
-Source=MappedSource(DOI)
-AuthorList=MappedAuthorList(DOI)
-Article=MappedArticle(DOI)
-
-
-
-
-with requests.Session() as s:
-    s.headers= headers
-
-#we ask for login token
-    params={'action': 'query',
-            'meta': 'tokens',
-            'type': 'login',
-            'format': 'json'}
+def deletePage(crsftoken,s, title, urlBase):
+    data={'action': 'delete',
+            'title': title,
+            'token': crsftoken,
+            'format': 'json'
+            }
     
-    r1= s.get(url=urlBase, params=params)
-    logintoken=r1.json()['query']['tokens']['logintoken']
-    #print(logintoken)
+    r4= s.post(url=urlBase, data=data)
+    return (r4.json())
 
-#ze post the credentials:
-    data={'action': 'login',
-             
-             'lgname': username,
-             'lgpassword': password,
-             'lgtoken': logintoken,
-             'format': 'json'
-             }
-    
-    r2=s.post(url= urlBase, data=data)
-    #print(r2.json()) 
+def Filling_Pipeline(DOI):
 
-#we ask crsf token:
-    params3={'action': 'query',
-             'meta':'tokens',
-             'type': 'csrf',
-             'format': 'json'
-             }
-    r3= s.get(url=urlBase, params=params3)
-    crsftoken=r3.json()['query']['tokens']['csrftoken']
-    #print(crsftoken)
+    KeywordList= MappedArticle(DOI)['Keyword']
+    #print(KeywordList)
+
+    Source=MappedSource(DOI)
+    AuthorList=MappedAuthorList(DOI)
+    Article=MappedArticle(DOI)
 
 
 
 
-#Now we create a page:
-#Creating Keyword page using keyword template:
-    TraceabilityK=[]
-    for k in KeywordList:
-        data5={'action': 'edit',
-                'title': k,
-                'text': f'{{{{keyword|name={k}}}}}',
-                'token': crsftoken,
+    with requests.Session() as s:
+        s.headers= headers
+
+    #we ask for login token
+        params={'action': 'query',
+                'meta': 'tokens',
+                'type': 'login',
+                'format': 'json'}
+        
+        r1= s.get(url=urlBase, params=params)
+        logintoken=r1.json()['query']['tokens']['logintoken']
+        #print(logintoken)
+
+    #ze post the credentials:
+        data={'action': 'login',
+                
+                'lgname': username,
+                'lgpassword': password,
+                'lgtoken': logintoken,
                 'format': 'json'
                 }
+        
+        r2=s.post(url= urlBase, data=data)
+        #print(r2.json()) 
+
+    #we ask crsf token:
+        params3={'action': 'query',
+                'meta':'tokens',
+                'type': 'csrf',
+                'format': 'json'
+                }
+        r3= s.get(url=urlBase, params=params3)
+        crsftoken=r3.json()['query']['tokens']['csrftoken']
+        #print(crsftoken)
+
+
+
+
+#Creating Keyword pages:
+        print('=========Creating Keyword pages============')
+        TraceabilityK=[]
+        print('Creating Keyword Pages')
+        for k in KeywordList:
+            data5={'action': 'edit',
+                    'title': k,
+                    'text': f'{{{{keyword|name={k}}}}}',
+                    'token': crsftoken,
+                    'format': 'json'
+                    }
+                
+            r3= s.post(url=urlBase, data=data5)
+            if r3.status_code==200:
+                TraceabilityK.append(k)
+            else:
+                print('the kyeword page creation has failed', r3.json())
             
-        r3= s.post(url=urlBase, data=data5)
-        print(r3.json())
-        #TraceabilityK.append(r3.json()['edit']['title'])
-    #print(TraceabilityK)
+            #TraceabilityK.append(r3.json()['edit']['title'])
+        print('The keyword pages created are',TraceabilityK)
 
-#Delete a page:
-    data6={'action': 'delete',
-            'title': 'Keyword test via api',
-             'token': crsftoken,
-             'format': 'json'
-             }
-    
-    #r4= s.post(url=urlBase, data=data6)
-    #print(r4.json())
 
-#ConferenceField={','.join(Source["Field"])}
+
+    #ConferenceField={','.join(Source["Field"])}
 #Creating pages for the Category Conference/Journal
-    TraceabilitySource=[]
-    dataSource={}
-    if Source['Type']== "conference":
-        dataSource={'action': 'edit',
-                'title': Source['Name'],
-                'text': f'''{{{{Conference
-                    |ConferenceName={Source["Name"]}
-                    |ConferenceCountry={Source["Country"]}
-                    |ConferenceField={','.join(Source["Field"])}
-                    |ConferenceHostOrganisation={Source["host_organization"]}
+        print('=========Creating Source pages============')
+        TraceabilitySource=[]
+        dataSource={}
+        if Source['Type']== "conference":
+            dataSource={'action': 'edit',
+                    'title': Source['Name'],
+                    'text': f'''{{{{Conference
+                        |ConferenceName={Source["Name"]}
+                        |ConferenceCountry={Source["Country"]}
+                        |ConferenceField={','.join(Source["Field"])}
+                        |ConferenceHostOrganisation={Source["host_organization"]}
 
-                    }}}}''',
-                'token': crsftoken,
-                'format': 'json'
-                }
-        
-        r_conf= s.post(url=urlBase, data=dataSource)
-        print('Source is a conference')
-        print(r_conf.status_code)
-        print(r_conf.json())
-        #TraceabilitySource.append(r_conf['edit']['title'])
-        #print(TraceabilitySource)
-    else: 
+                        }}}}''',
+                    'token': crsftoken,
+                    'format': 'json'
+                    }
+            
+            r_conf= s.post(url=urlBase, data=dataSource)
+            print('the Source is a conference')
+            if r_conf.status_code==200:
+                TraceabilitySource.append(Source['Name'])
+            else:
+                print('Post request failed for the SourcePage ',r_conf.json())
+            #TraceabilitySource.append(r_conf['edit']['title'])
+            #print(TraceabilitySource)
+        else: 
 
-        #fields_wikitext = " ".join([f"[[Has field::{f}]]" for f in Source["Field"]])
+            #fields_wikitext = " ".join([f"[[Has field::{f}]]" for f in Source["Field"]])
 
-        dataSource={'action': 'edit',
-                'title': Source['Name'],
-                'text': f'''{{{{Journal
-                    |JournalName={Source["Name"]}
-                    |JournalCountry={Source["Country"]}
-                    |JournalFields={','.join(Source["Field"])}
-                    |HostOrganisation={Source["host_organization"]}
+            dataSource={'action': 'edit',
+                    'title': Source['Name'],
+                    'text': f'''{{{{Journal
+                        |JournalName={Source["Name"]}
+                        |JournalCountry={Source["Country"]}
+                        |JournalFields={','.join(Source["Field"])}
+                        |HostOrganisation={Source["host_organization"]}
 
-                    }}}}''',
-                'token': crsftoken,
-                'format': 'json'
-                }
-        
-        r_jrnl= s.post(url=urlBase, data=dataSource)
-        print('Source is a journal')
-        print(r_jrnl.status_code)
-        print(r_jrnl.json())
-        print(Source['Name'])
-        #TraceabilitySource.append(r_jrnl['edit']['title'])
-        #print(TraceabilitySource)
+                        }}}}''',
+                    'token': crsftoken,
+                    'format': 'json'
+                    }
+            
+            r_jrnl= s.post(url=urlBase, data=dataSource)
+            print('Source is a journal')
+            if r_jrnl.status_code==200:
+                TraceabilitySource.append(Source['Name'])
+            else:
+                print('Post request failed for the sourcePage ',r_conf.json())
+            #TraceabilitySource.append(r_jrnl['edit']['title'])
+            #print(TraceabilitySource)
+        print('The Source page created is:',TraceabilitySource)
 
 
 #Creating the pages for institution Category:
-    InstitutionsCreated=[]
-    for auth in AuthorList:
-        for inst in auth['institutions']:
-            dataInst= {'action': 'edit',
-                       'title': inst['Name'],
-                       'text': f'''{{{{Institution
-                           |InstitutionName={inst['Name']}
-                           |InstitutionCountry={inst['Country']}
-                           |InstitutionType={inst['type']}
-                       }}}}''',
-                       'token': crsftoken,
-                        'format': 'json'
-                       }
-            r_inst= s.post(url=urlBase, data=dataInst)
-            if r_inst.status_code==200:
-                InstitutionsCreated.append(inst['Name'])
-            else:
-                print('There is an error with an institution', inst)
-            #print(r_inst.status_code)
-            #print(r_inst.json())
-            
-    #print(InstitutionsCreated)
-            
+        print('=========Creating Institution pages============')
+        InstitutionsCreated=[]
+        for auth in AuthorList:
+            for inst in auth['institutions']:
+                dataInst= {'action': 'edit',
+                        'title': inst['Name'],
+                        'text': f'''{{{{Institution
+                            |InstitutionName={inst['Name']}
+                            |InstitutionCountry={inst['Country']}
+                            |InstitutionType={inst['type']}
+                        }}}}''',
+                        'token': crsftoken,
+                            'format': 'json'
+                        }
+                r_inst= s.post(url=urlBase, data=dataInst)
+                if r_inst.status_code==200:
+                    InstitutionsCreated.append(inst['Name'])
+                else:
+                    print('There is an error with an institution', r_inst.json())
+                #print(r_inst.status_code)
+                #print(r_inst.json())
+                
+        print('Institution Pages created are',InstitutionsCreated)
+                
 
 #Creating pages for Author Category:
-    AuthorsCreated=[]
-    for auth in AuthorList:
-        res=  [auth['institutions'][i]['Name'] for i in range(len(auth['institutions']))]
-        res=','.join(res)
+        print('=========Creating Author pages============')
+        AuthorsCreated=[]
+        for auth in AuthorList:
+            res=  [auth['institutions'][i]['Name'] for i in range(len(auth['institutions']))]
+            res=','.join(res)
 
-        dataAuthor={'action': 'edit',
-                'title': auth['FullName'],
-                'text': f'''{{{{ Author
-                    |FullName={auth["FullName"]}
-                    |WorkCount={auth["works_count"]}
-                    |orcid={auth['orcid']}
-                    |institution={res}
-                    
-                    }}}} ''',
-                'token': crsftoken,
-                'format': 'json'
-                }
-        r_auth=s.post(url=urlBase,data=dataAuthor)
+            dataAuthor={'action': 'edit',
+                    'title': auth['FullName'],
+                    'text': f'''{{{{ Author
+                        |FullName={auth["FullName"]}
+                        |WorkCount={auth["works_count"]}
+                        |orcid={auth['orcid']}
+                        |institution={res}
+                        
+                        }}}} ''',
+                    'token': crsftoken,
+                    'format': 'json'
+                    }
+            r_auth=s.post(url=urlBase,data=dataAuthor)
 
-        if r_auth.json()['edit']['result']!= 'Success':
-            print('there is problem with this one',r_auth.json() )
-        else:
-            AuthorsCreated.append(auth["FullName"])
-        #print(r_auth.status_code)
-        #print(r_auth.json())
-        
-        
-    #print(AuthorsCreated)
-        
+            if r_auth.json()['edit']['result']!= 'Success':
+                print('there is problem with this one',r_auth.json() )
+            else:
+                AuthorsCreated.append(auth["FullName"])
+            #print(r_auth.status_code)
+            #print(r_auth.json())
+            
+            
+        print('Author pages created are:',AuthorsCreated)
+            
 
 #Creating Pages for Article category:
-    dataArticle= {'action':'edit',
-                  'title':Article['title'] ,
-                 'text': f'''{{{{Article
-                 |Articletitle={Article['title']}
-                 |PublicationDate={Article['publication_date']}
-                 |CitationCount={Article['CitationCount']}
-                 |DOI={Article['DOI']}
-                 |PublishedIn={Article['PublishedIn']['name']}
-                 |Abstract={Article["abstract_inverted_index"]}
-                 |Author= {','.join(Article['authors_names'])}
-                 |Keyword={','.join(Article['Keyword'])}
-                 |Cites= to add later
+        print('=========Creating Article pages============')
+        TraceabilityArticles=[]
+        dataArticle= {'action':'edit',
+                    'title':Article['title'] ,
+                    'text': f'''{{{{Article
+                    |Articletitle={Article['title']}
+                    |PublicationDate={Article['publication_date']}
+                    |CitationCount={Article['CitationCount']}
+                    |DOI={Article['DOI']}
+                    |PublishedIn={Article['PublishedIn']['name']}
+                    |Abstract={Article["abstract_inverted_index"]}
+                    |Author= {','.join(Article['authors_names'])}
+                    |Keyword={','.join(Article['Keyword'])}
+                    |Cites= to add later
 
 
 
-                 }}}}''',
+                    }}}}''',
 
-                 'token': crsftoken,
-                 'format': 'json',
-                }
-    #r_art=s.post(url=urlBase, data=dataArticle)
-    #print(r_art.status_code)
-    #print(r_art.json())
+                    'token': crsftoken,
+                    'format': 'json',
+                    }
+        r_art=s.post(url=urlBase, data=dataArticle)
+        if r_art.status_code == 200:
+            TraceabilityArticles.append(Article['title'])
+        else:
+            print(r_art.json())
+
+        print('Article page created is',TraceabilityArticles)
+
+
+listDOI=[
+"https://doi.org/10.1080/17512549.2022.2136240",
+"https://doi.org/10.1016/J.JII.2024.100747",
+"https://doi.org/10.3390/BUILDINGS12050544",
+"https://doi.org/10.3390/APP13158814",
+"https://doi.org/10.1016/J.APENERGY.2021.116601",
+"https://doi.org/10.1109/ACCESS.2024.3498107",
+"https://doi.org/10.1016/J.JOBE.2024.111150",
+"https://doi.org/10.48550/ARXIV.2408.00540",
+]
+
+
+for DOI in listDOI:
+    Filling_Pipeline(DOI)
+    print('######Next DOI ######')
+
+
 
 '''
-    "title": "A Comprehensive Review of Digital Twin Technology in Building Energy Consumption Forecasting",
-    "DOI": "https://doi.org/10.1109/access.2024.3498107",
-    "publication_date": "2024-01-01",
-    "CitationCount": 18,
-    "referencedWorksCount": 160,
-
+        "title": "A Comprehensive Review of Digital Twin Technology in Building Energy Consumption Forecasting",
+        "DOI": "https://doi.org/10.1109/access.2024.3498107",
+        "publication_date": "2024-01-01",
+        "CitationCount": 18,
+        "referencedWorksCount": 160,
 '''
 
 
