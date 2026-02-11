@@ -1,8 +1,11 @@
 import requests 
 import json
 import os
+import time
 from dotenv import load_dotenv
 from Extraction import AbstractMapper, MappedAuthorList, MappedArticle, MappedSource
+from UndoInvertIndex import Undo_Invert_Index, maxIndex
+
 
 
 
@@ -32,6 +35,11 @@ DOI_list=["https://doi.org/10.1109/ACCESS.2024.3498107"]
 DOI="https://doi.org/10.1109/ACCESS.2024.3498107"
 #DOI= "https://doi.org/10.1609/aaai.v35i1.16089"
 
+
+def YesOrNo(a):
+    if a:
+        return 'Yes'
+    return 'No'
 
 def deletePage(crsftoken,s, title, urlBase):
     data={'action': 'delete',
@@ -110,6 +118,8 @@ def Filling_Pipeline(DOI):
                 TraceabilityK.append(k)
             else:
                 print('the kyeword page creation has failed', r3.json())
+
+            time.sleep(3)
             
             #TraceabilityK.append(r3.json()['edit']['title'])
         print('The keyword pages created are',TraceabilityK)
@@ -130,6 +140,12 @@ def Filling_Pipeline(DOI):
                         |ConferenceField={','.join(Source["Field"])}
                         |ConferenceHostOrganisation={Source["host_organization"]}
 
+                        |AlternateNames={','.join(Source['AlternateName'])}
+                        |ISSN={','.join(Source['ISSN'])}
+                        |is_in_doaj={YesOrNo(Source['is_in_doaj'])}
+                        |h_index={Source['h_index']}
+                        |i10_index={Source['i10_index']}
+
                         }}}}''',
                     'token': crsftoken,
                     'format': 'json'
@@ -141,6 +157,8 @@ def Filling_Pipeline(DOI):
                 TraceabilitySource.append(Source['Name'])
             else:
                 print('Post request failed for the SourcePage ',r_conf.json())
+
+            time.sleep(3)
             #TraceabilitySource.append(r_conf['edit']['title'])
             #print(TraceabilitySource)
         else: 
@@ -155,6 +173,12 @@ def Filling_Pipeline(DOI):
                         |JournalFields={','.join(Source["Field"])}
                         |HostOrganisation={Source["host_organization"]}
 
+                        |AlternateNames={','.join(Source['AlternateName'])}
+                        |ISSN={','.join(Source['ISSN'])}
+                        |is_in_doaj={YesOrNo(Source['is_in_doaj'])}
+                        |h_index={Source['h_index']}
+                        |i10_index={Source['i10_index']}
+
                         }}}}''',
                     'token': crsftoken,
                     'format': 'json'
@@ -168,6 +192,7 @@ def Filling_Pipeline(DOI):
                 print('Post request failed for the sourcePage ',r_conf.json())
             #TraceabilitySource.append(r_jrnl['edit']['title'])
             #print(TraceabilitySource)
+            time.sleep(3)
         print('The Source page created is:',TraceabilitySource)
 
 
@@ -193,10 +218,11 @@ def Filling_Pipeline(DOI):
                     print('There is an error with an institution', r_inst.json())
                 #print(r_inst.status_code)
                 #print(r_inst.json())
+                time.sleep(3)
                 
         print('Institution Pages created are',InstitutionsCreated)
                 
-
+#|Current affiliation={auth['Current institution']}
 #Creating pages for Author Category:
         print('=========Creating Author pages============')
         AuthorsCreated=[]
@@ -210,24 +236,31 @@ def Filling_Pipeline(DOI):
                         |FullName={auth["FullName"]}
                         |WorkCount={auth["works_count"]}
                         |orcid={auth['orcid']}
+
                         |institution={res}
+ 
+
+                        |h_index={auth['h_index']}
+                        |i10_index= {auth['i10_index']}
                         
                         }}}} ''',
                     'token': crsftoken,
                     'format': 'json'
                     }
             r_auth=s.post(url=urlBase,data=dataAuthor)
-
+            #print(r_auth.json())
             if r_auth.json()['edit']['result']!= 'Success':
                 print('there is problem with this one',r_auth.json() )
             else:
                 AuthorsCreated.append(auth["FullName"])
             #print(r_auth.status_code)
             #print(r_auth.json())
+            time.sleep(3)
             
             
         print('Author pages created are:',AuthorsCreated)
             
+# 
 
 #Creating Pages for Article category:
         print('=========Creating Article pages============')
@@ -237,12 +270,20 @@ def Filling_Pipeline(DOI):
                     'text': f'''{{{{Article
                     |Articletitle={Article['title']}
                     |PublicationDate={Article['publication_date']}
-                    |CitationCount={Article['CitationCount']}
+
+                    |ReferencesCount={Article['CitesCount']}
+                    |CitedByCount={Article['CitedByCount']}
+
                     |DOI={Article['DOI']}
                     |PublishedIn={Article['PublishedIn']['name']}
-                    |Abstract={Article["abstract_inverted_index"]}
+                    |Abstract={Undo_Invert_Index(Article["abstract_inverted_index"])}
                     |Author= {','.join(Article['authors_names'])}
                     |Keyword={','.join(Article['Keyword'])}
+                    |Language={Article['language']}
+                    |FWCI={Article['FWCI']}
+                    |Topic={Article['topic']}
+                    |Subfield={Article['Subfield']}
+                    |Field={Article['field']}
                     |Cites= to add later
 
 
@@ -257,6 +298,7 @@ def Filling_Pipeline(DOI):
             TraceabilityArticles.append(Article['title'])
         else:
             print(r_art.json())
+
 
         print('Article page created is',TraceabilityArticles)
 
@@ -273,9 +315,12 @@ listDOI=[
 ]
 
 
-for DOI in listDOI:
+for DOI in listDOI[2:]:
     Filling_Pipeline(DOI)
+    time.sleep(3)
     print('######Next DOI ######')
+
+
 
 
 

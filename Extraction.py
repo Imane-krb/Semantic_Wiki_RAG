@@ -15,10 +15,20 @@ def ArticleMapper(r_json):
     Article['title']= r_json['title']
     Article['DOI']= r_json['doi']
     Article['publication_date']= r_json['publication_date']
-    Article['CitationCount'] =r_json['cited_by_count']
+    
     Article['referencedWorksCount']=r_json['referenced_works_count']
-    Article['Cites']= r_json['referenced_works']
+    Article['CitesArticles']= r_json['referenced_works']
     Article['abstract_inverted_index']= r_json['abstract_inverted_index']
+
+    Article['CitesCount']=r_json['referenced_works_count']
+    Article['CitedByCount'] =r_json['cited_by_count']
+
+    Article['language']=r_json['language']
+    Article['FWCI']=r_json['fwci']
+    Article['topic']=r_json['primary_topic']['display_name']
+    Article['Subfield']=r_json['primary_topic']['subfield']['display_name']
+    Article['field']=r_json['primary_topic']['field']['display_name']
+
 
 
     Article['Keyword']=[]
@@ -49,9 +59,15 @@ def Author_Mapper(r_auth_json):
     Author['FullName']= r_auth_json['display_name']
     Author['orcid']= r_auth_json['orcid']
     Author['works_count']= r_auth_json['works_count']
+
+    Author['h_index']=r_auth_json['summary_stats']['h_index']
+    Author['i10_index']=r_auth_json['summary_stats']['i10_index']
+    
     Author['institutions']=[]
     
+    
     if r_auth_json['affiliations']:
+        Author['Current institution']=r_auth_json['affiliations'][0]['institution']['display_name']
         for i in r_auth_json['affiliations']:
             institutions_dict={}
             institutions_dict['Name']=i['institution']['display_name']
@@ -68,6 +84,12 @@ def Source_Mapper(r_source_json):
     Source['Type']=r_source_json['type']
     Source['host_organization']=r_source_json['host_organization_name']
     Source['Country']= r_source_json['country_code']
+
+    Source['ISSN']=r_source_json['issn'] #list
+    Source['AlternateName']=r_source_json['alternate_titles']
+    Source['is_in_doaj']=r_source_json['is_in_doaj']
+    Source['h_index']=r_source_json['summary_stats']['h_index']
+    Source['i10_index']=r_source_json['summary_stats']['i10_index']
     #source['Field']=[]
     L=[]
 
