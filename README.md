@@ -9,7 +9,7 @@ A pipeline that extracts scholarly metadata from **OpenAlex API** and populates 
   <img src="Ontology/ontology_schema.drawio.png" alt="Ontology Schema" width="700"/>
 </p>
 
-## 📁 Project Structure
+## Project Structure
 ```
 Semantic_Wiki_RAG/
 ├── Extraction.py                  # Data extraction & mapping from OpenAlex
