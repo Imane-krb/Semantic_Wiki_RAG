@@ -1,0 +1,40 @@
+{
+    "Name": "Journal of Building Engineering",
+    "Type": "journal",
+    "host_organization": "Elsevier",
+    "Country": "GB",
+    "ISSN": [
+        "2352-7102"
+    ],
+    "AlternateName": [],
+    "is_in_doaj": false,
+    "h_index": 144,
+    "i10_index": 7962,
+    "Field": [
+        "Concrete and Cement Materials Research",
+        "Innovative concrete reinforcement materials",
+        "Building Energy and Comfort Optimization",
+        "Structural Behavior of Reinforced Concrete",
+        "Innovations in Concrete and Construction Materials",
+        "Structural Load-Bearing Analysis",
+        "Seismic Performance and Analysis",
+        "Recycled Aggregate Concrete Performance",
+        "Concrete Corrosion and Durability",
+        "Magnesium Oxide Properties and Applications",
+        "Wind and Air Flow Studies",
+        "Urban Heat Island Mitigation",
+        "Masonry and Concrete Structural Analysis",
+        "Building materials and conservation",
+        "Structural Response to Dynamic Loads",
+        "Concrete Properties and Behavior",
+        "Recycling and utilization of industrial and municipal waste in materials production",
+        "Fire effects on concrete materials",
+        "Structural Engineering and Vibration Analysis",
+        "BIM and Construction Integration",
+        "Hygrothermal properties of building materials",
+        "Sustainable Building Design and Assessment",
+        "Structural Health Monitoring Techniques",
+        "Infrastructure Maintenance and Monitoring",
+        "Smart Materials for Construction"
+    ]
+}
