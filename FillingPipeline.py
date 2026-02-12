@@ -260,8 +260,7 @@ def Filling_Pipeline(DOI):
             
         print('Author pages created are:',AuthorsCreated)
             
-# 
-
+#
 #Creating Pages for Article category:
         print('=========Creating Article pages============')
         TraceabilityArticles=[]
@@ -284,7 +283,7 @@ def Filling_Pipeline(DOI):
                     |Topic={Article['topic']}
                     |Subfield={Article['Subfield']}
                     |Field={Article['field']}
-                    |Cites= to add later
+                    |Cites={','.join(Article['CitesArticles'])}
 
 
 

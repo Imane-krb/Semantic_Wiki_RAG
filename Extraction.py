@@ -7,8 +7,13 @@ load_dotenv()
 Authorisation= os.getenv("Authorisation")
 
 
-#Organise the extracted data into a dictionary:
 
+#Get DOI link from referenced_works:
+
+
+
+
+#Organise the extracted data into a dictionary:
 #We start by the Category Article, with all its data and object properties
 def ArticleMapper(r_json):
     Article={}
@@ -125,6 +130,21 @@ def AbstractMapper(DOI):
 
 #Mapping the original response to Article Category:
         Article= ArticleMapper(Doi_OriginalResponse)
+        #print(Article['CitesArticles'])
+        refsToInclude=[]
+        for ref in Article['CitesArticles']:
+            work_id=ref.split("/")[-1:][0]
+            new_link= urlBaseAuthor + work_id
+            r=s.get(url=new_link)
+            if r.status_code==200:
+                #print(r.json())
+                if r.json()['doi']:
+                    refsToInclude.append(r.json()['doi'])
+        #print(refsToInclude)
+        
+        Article['CitesArticles']=refsToInclude
+        
+                
 
         with open('Article', 'w') as f:
             json.dump(Article,f, indent=4)
@@ -210,7 +230,7 @@ def MappedSource(DOI):
     result= AbstractMapper(DOI)
     return result[2]
 
-#print(AbstractMapper(DOI_list[1]))
+#AbstractMapper(DOI_list[1])
 
 
 #print(MappedArticle("https://doi.org/10.1109/ACCESS.2024.3498107"))
