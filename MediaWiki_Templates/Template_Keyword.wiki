@@ -1,0 +1,14 @@
+
+
+
+<noinclude>
+This template is used to create Keyword pages.
+</noinclude>
+<includeonly>
+
+This is a keyword used to classify articles.
+
+[[Has name::{{{name}}}]]
+
+[[Category:Keyword]]
+</includeonly>

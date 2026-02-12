@@ -1,0 +1,18 @@
+<noinclude>
+This template is used for Institution pages.
+</noinclude>
+<includeonly>
+{| class="wikitable"
+|-
+! Name
+| [[Has name::{{{InstitutionName|}}}]]
+|-
+! Country
+| [[Has country::{{{InstitutionCountry|}}}]]
+|-
+! Type
+| [[Has institution type::{{{InstitutionType|}}}]]
+|}
+
+[[Category:Institution]]
+</includeonly>

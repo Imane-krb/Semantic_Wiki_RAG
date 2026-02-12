@@ -1,0 +1,55 @@
+<noinclude>
+This template is used for Article pages.
+</noinclude>
+<includeonly>
+{| class="wikitable"
+|-
+! Title
+| [[Has title::{{{Articletitle|}}}]]
+|-
+! Publication Date
+| [[Has publication date::{{{PublicationDate|}}}]]
+|-
+! Citation Count
+| [[Has citation count::{{{CitedByCount|}}}]]
+|-
+! ReferencesCount
+| [[Has references count::{{{ReferencesCount|}}}]]
+|-
+! DOI
+| [[Has DOI::{{{DOI|}}}]]
+|-
+! Abstract
+| [[Has abstract::{{{Abstract|}}}]]
+|-
+! Author(s)
+| {{#arraymap:{{{Author|}}}|,|x|[[Author::x]]|, }}
+|-
+! Keyword(s)
+| {{#arraymap:{{{Keyword|}}}|,|x|[[Keyword::x]]|, }}
+|-
+! Published in
+| [[Published in::{{{PublishedIn|}}}]]
+|-
+! Cites
+| {{#arraymap:{{{Cites|}}}|,|x|[[Cites::x]]|, }}
+|-
+! Language
+| [[Has language::{{{Language|}}}]]
+|-
+! FWCI
+| [[Has FWCI::{{{FWCI|}}}]]
+|-
+! Topic
+| [[Has topic::{{{Topic|}}}]]
+|-
+! Subfield
+| [[Has subfield::{{{Subfield|}}}]]
+|-
+! Field
+| [[Has field::{{{Field|}}}]]
+|-
+|}
+
+[[Category:Article]]
+</includeonly>
